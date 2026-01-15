@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oll Fight</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #bc1a1a;
+            --dark: #111;
+            --grey: #222;
+            --light: #f4f4f4;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+        }
+
+        section {
+            padding: 80px 10%;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 3px;
+            transition: 0.3s;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #901515;
+            transform: scale(1.05);
+        }
+
+        /* Navigation */
+        header {
+            background: rgba(0, 0, 0, 0.95);
+            color: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.75rem;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('banner.png') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+
+        /* História */
+        .history {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            background: var(--light);
+        }
+
+        .history-content {
+            flex: 1;
+        }
+
+        .history-img {
+            flex: 1;
+        }
+
+        .history-img img {
+            width: 100%;
+            border-radius: 5px;
+            box-shadow: 10px 10px 0px var(--primary);
+        }
+
+        /* Professores */
+        .teacher-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .teacher-card {
+            text-align: center;
+        }
+
+        .teacher-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+            border-bottom: 4px solid var(--primary);
+        }
+
+        .teacher-card h3 {
+            margin-top: 15px;
+            color: var(--primary);
+        }
+
+        /* Horários */
+        .schedule-container {
+            overflow-x: auto;
+            margin-top: 30px;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .schedule-table th {
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        /* Galeria */
+        .gallery {
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        .gallery-grid img:hover {
+            filter: grayscale(0%);
+            transform: scale(1.03);
+        }
+
+        /* Planos */
+        .pricing {
+            background: var(--light);
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .price-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            width: 280px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid var(--primary);
+        }
+
+        .price-card .cost {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 15px 0;
+        }
+
+        /* Depoimentos */
+        .testimonials {
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .testimonial-item {
+            background: var(--grey);
+            padding: 30px;
+            border-left: 5px solid var(--primary);
+        }
+
+        /* FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        details {
+            background: var(--light);
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        summary {
+            font-weight: bold;
+            font-family: 'Oswald', sans-serif;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Localização */
+        .location {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .map-box {
+            flex: 1;
+            height: 300px;
+            background: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25d366;
+            color: #fff;
+            padding: 14px 18px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .whatsapp-float i {
+            font-size: 26px;
+        }
+
+        .whatsapp-float span {
+            font-size: 14px;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        @media (max-width: 768px) {
+
+            .history,
+            .location {
+                flex-direction: column;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .whatsapp-float span {
+                display: none;
+            }
+
+            .whatsapp-float {
+                padding: 14px;
+                border-radius: 50%;
+            }
+
+            nav {
+                display: none;
+            }
+
+            /* Menu hamburguer simplificado ficaria aqui */
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Oll Fight</div>
+        <nav>
+            <a href="#home">HOME</a>
+            <a href="#historia">HISTÓRIA</a>
+            <a href="#professores">MESTRES</a>
+            <a href="#horarios">HORÁRIOS</a>
+            <a href="#galeria">GALERIA</a>
+            <a href="#planos">PLANOS</a>
+            <a href="#contato">CONTATO</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <h1>FORÇA E HONRA</h1>
+        <p>A mais tradicional escola de artes marciais da cidade.</p>
+        <br>
+        <a href="#planos" class="btn">COMEÇAR AGORA</a>
+    </section>
+
+    <section class="history" id="historia">
+        <div class="history-content">
+            <h2>Nossa Filosofia</h2>
+            <p>A Oll Fight é uma academia especializada em Jiu-Jitsu e Defesa Pessoal, com treinos baseados na
+                consagrada metodologia Carlson Gracie. Atendemos alunos de todas as idades e níveis em turmas separadas
+                por faixa etária e gênero, com foco técnico, segurança e evolução constante.</p>
+            <br>
+            <h2>Metodologia</h2>
+            <p>Seguimos a tradicional linha de ensino Carlson Gracie, conhecida mundialmente por formar lutadores
+                completos, com ênfase em técnicas eficientes para competição e defesa pessoal. Nossa metodologia
+                progressiva garante evolução constante, independente do seu nível atual.</p>
+        </div>
+        <div class="history-img">
+            <img src="nossahistoria.jpg" alt="Dojo">
+        </div>
+    </section>
+
+    <section id="professores">
+        <h2 class="text-center">Nossos Professores</h2>
+        <div class="teacher-grid">
+            <div class="teacher-card">
+                <img src="alexandre.jpg" alt="Mestre">
+                <h3>Mestrão Alexandre Oliveira</h3>
+                <p>Jiu-Jitsu/Muay Thai</p>
+            </div>
+            <div class="teacher-card">
+                <img src="carroca.png" alt="Mestre">
+                <h3>Carroçinha</h3>
+                <p>Jiu-Jitsu</p>
+            </div>
+            <div class="teacher-card">
+                <img src="hugo.jpeg" alt="Mestre">
+                <h3>Hugo</h3>
+                <p>Jiu-Jitsu</p>
+            </div>
+            <div class="teacher-card">
+                <img src="gedra.png" alt="Mestre">
+                <h3>Instrutor Rafael Gedra</h3>
+                <p>Jiu-Jitsu Kids</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="horarios" style="background: var(--light);">
+        <h2 class="text-center">Grade de Horários</h2>
+        <div class="schedule-container">
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Aulas</th>
+                        <th>Segunda</th>
+                        <th>Terça</th>
+                        <th>Quarta</th>
+                        <th>Quinta</th>
+                        <th>Sexta</th>
+                        <th>Sabado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Jiu-Jitsu</td>
+                        <td>11:00 | 18:00 | 20:30</td>
+                        <td>11:00 | 17:00 | 17:40 Kids | 19:00</td>
+                        <td>11:00 | 18:00 | 20:30</td>
+                        <td>11:00 | 17:00 | 17:40 Kids | 19:00 | 21:00</td>
+                        <td>11:00 | 18:00</td>
+                        <td>16:00 NoGi</td>
+                    </tr>
+                    <tr>
+                        <td>Muay Thai</td>
+                        <td>07:00 | 08:00</td>
+                        <td>20:00</td>
+                        <td>07:00 | 08:00</td>
+                        <td>20:00</td>
+                        <td>07:00 | 08:00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="gallery" id="galeria">
+        <h2 class="text-center">Galeria do CT</h2>
+        <div class="gallery-grid">
+            <img src="carrosel1.jpeg" alt="1">
+            <img src="carrosel2.jpeg" alt="2">
+            <img src="carrosel3.jpeg" alt="3">
+            <img src="carrosel4.jpg" alt="4">
+        </div>
+    </section>
+    <section class="pricing" id="planos">
+        <div class="price-card">
+            <h3>Básico</h3>
+            <div class="cost">R$ 150</div>
+            <p>3x por semana<br>1 Modalidade</p>
+            <br><a href="#" class="btn">ASSINAR</a>
+        </div>
+        <div class="price-card" style="transform: scale(1.1); border-color: var(--dark);">
+            <h3>Black Belt</h3>
+            <div class="cost">R$ 250</div>
+            <p>Acesso Livre<br>Todas as Modalidades</p>
+            <br><a href="#" class="btn">ASSINAR</a>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2 class="text-center">Depoimentos</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-item">
+                <p>"Mudou minha vida e minha saúde. Professores excelentes!"</p>
+                <small>- Ricardo Oliveira</small>
+            </div>
+            <div class="testimonial-item">
+                <p>"Melhor ambiente para treinar Jiu-Jitsu na região."</p>
+                <small>- Ana Costa</small>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq-container">
+        <h2 class="text-center">Dúvidas Comuns</h2>
+        <details>
+            <summary>Iniciantes podem participar?</summary>
+            <p>Sim! Temos turmas exclusivas para quem está começando do zero.</p>
+        </details>
+        <details>
+            <summary>Preciso de kimono próprio?</summary>
+            <p>Para a aula experimental nós emprestamos, depois orientamos sobre a compra.</p>
+        </details>
+        <details>
+            <summary>Qual é a idade mínima para começar a treinar?</summary>
+            <p>Aceitamos alunos a partir de 4 anos de idade em nossa turma infantil. Temos programas específicos para
+                diferentes faixas etárias: 4-10 anos (Kids), 10-15 anos (Teens) e acima de 15 anos (Adulto). Cada
+                programa é adaptado para as necessidades de desenvolvimento físico e mental de cada idade.</p>
+        </details>
+    </section>
+
+    <section class="location" id="contato">
+        <div class="loc-info">
+            <h2>Onde Estamos</h2>
+            <p><i class="fas fa-map-marker-alt"></i> R. Isabel Souza Nunes, 31 - Fragata, Marília - SP, 17519-190</p>
+            <p><i class="fas fa-phone"></i> (11) 4002-8922</p>
+            <br>
+            <a href="https://wa.me/5514997731892" class="btn">FALAR NO WHATSAPP</a>
+        </div>
+        <div class="map-box">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3693.264443524372!2d-49.93031829999999!3d-22.2300432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94bfd12dd5dcc6ed%3A0xc063f0658f64cba3!2sAcademia%20Ollfight!5e0!3m2!1spt-BR!2sbr!4v1757968616325!5m2!1spt-BR!2sbr"
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </section>
+
+    <a href="https://wa.me/5514997731892" class="whatsapp-float" target="_blank" aria-label="Fale Conosco no WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span>Fale Conosco</span>
+    </a>
+
+
+    <footer class="text-center" style="background:#000; color:#555; padding: 30px;">
+        <p>&copy; 2026 Oll Fight. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+
+</html>
